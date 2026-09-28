@@ -1,6 +1,6 @@
 # 📈 Stock-Prediction (MMAN & Quant RSI): 每日前沿文献关联与多模态时序/防过拟合 RSI 落地库 (2026-09)
 
-**Document ID:** `STOCK-LIT-202609` | **Last Updated:** `2026-09-27` | **Target Path:** `docs/research/daily_frontier_literature_2026_09.md` | **Total Routed Papers:** `15`
+**Document ID:** `STOCK-LIT-202609` | **Last Updated:** `2026-09-28` | **Target Path:** `docs/research/daily_frontier_literature_2026_09.md` | **Total Routed Papers:** `16`
 
 > [!IMPORTANT]
 > **🔗 跨仓库文献引用链闭环 (Cross-Repository Reference Chain Closure)**
@@ -13,6 +13,7 @@
 
 | 收录日期 | 论文标题与 arXiv 链接 | 关键实测收益 / 核心结论 | 锚定本仓库代码模块与文档路径 (`Target Module`) | 原始精读归档 |
 | :---: | :--- | :--- | :--- | :---: |
+| `2026-09-28` | [**🧬 TTHE**](https://arxiv.org/abs/2607.08124) (`arXiv:2607.08124`) | **TTHE** 在 SWE-bench 与跨工具链评测中，无需任何测试集金标标签即可在线修复 73% 的环境与解析器异常，使零样本一次通过率提升 **+9.4%**； | `fin_skills/skills/pre-trade-checks/` & `fin_skills/skills/llm-finance-agents/` (Information Leakage Score ILS Priced-In Gate) | [2026-09-28](https://github.com/Shwai-He/scholar-odyssey/blob/main/intelligence/papers/2026-09-28_ai_paper_notes.md) |
 | `2026-09-27` | [**SHAPE**](https://arxiv.org/abs/2606.09886) (`arXiv:2606.09886`) | **跨架构零训练稳健性**：在 **Qwen3-30B-A3B**、**DeepSeek-V2-Lite** 与 **GPT-OSS-20B** 三大主流细粒度 MoE 模型上，仅需 128 条 C4/WikiText2 校准样本... | `rsi_campaign/` & `models/` (`Shwai-He/stock-prediction`) | [2026-09-27](https://github.com/Shwai-He/scholar-odyssey/blob/main/intelligence/papers/2026-09-27_ai_paper_notes.md) |
 | `2026-09-27` | [**L2R**](https://arxiv.org/abs/2601.21349) (`arXiv:2601.21349`) | **语言与视觉双模态全面验证**：在基于 **OLMoE** 的语言模型预训练/微调以及 **ImageNet** 视觉 MoE 骨干网络上，L2R 将路由器参数量削减 **60%–75%**，同时在相同激活专家预算下将下游任务困... | `rsi_campaign/` & `models/` (`Shwai-He/stock-prediction`) | [2026-09-27](https://github.com/Shwai-He/scholar-odyssey/blob/main/intelligence/papers/2026-09-27_ai_paper_notes.md) |
 | `2026-09-27` | [**OBCache**](https://arxiv.org/abs/2510.07651) (`arXiv:2510.07651`) | **即插即用全面提升主流基线**：在 **Llama-3.1-8B-Instruct**、**Qwen-2.5-7B/14B-Instruct** 与 **Mistral-7B** 上，将 OBCache 的... | `rsi_campaign/` & `models/` (`Shwai-He/stock-prediction`) | [2026-09-27](https://github.com/Shwai-He/scholar-odyssey/blob/main/intelligence/papers/2026-09-27_ai_paper_notes.md) |
@@ -33,7 +34,57 @@
 
 ## 📐 2. 逐篇论文深度机制解构、数学公式与本仓库落地指南 (Per-Paper Deep-Dive Cards)
 
-### 2.1 [2026-09-27] SHAPE: Coalition-Aware Expert Pruning for Sparse Mixture-of-Experts LLMs
+### 2.1 [2026-09-28] 🧬 *TTHE: Test-Time Harness Evolution & ForesightFlow Informed-Flow Quantification*
+> 🏷️ **核心关键词**：Test-Time Harness Evolution · Coding Agents · Information Leakage Score (ILS) · Regime & Informed Flow Detection  
+> 🔗 **arXiv 链接**：[`arXiv:2607.08124`](https://arxiv.org/abs/2607.08124) (`TTHE`) & [`arXiv:2605.00493`](https://arxiv.org/abs/2605.00493) (`ForesightFlow`)
+
+```
+  [ TTHE: 测试时脚手架演化 ]
+  执行期遭遇工具异常/语法报错 e_t ──► [ 无金标自诊断反射器 ] ──► 动态修补解析器/验证器脚手架 H_{t+1} ──► 恢复长程执行
+
+  [ ForesightFlow: 知情流信息泄漏量化 ]
+  新闻公告前订单流序列 F_{t0:t*} ──► [ 终端价格收敛分布 D_KL 积分 ] ──► 知情流泄漏指数 ILS ∈ [0, 1] ──► 量化抢跑预警
+```
+
+#### 🎯 背景与痛点 (Problem Statement)
+1. **智能体侧（TTHE）**：现有递归自我改进（RSI）框架（如 AIDE²、RRSI）依赖在离线训练集上耗时数天演化脚手架（Harness），一旦在测试时（Test-Time）遇到全新格式的编译器报错或 API 契约变更，静态脚手架便会持续触发无效重试。
+2. **量化金融侧（ForesightFlow）**：在多模态新闻驱动的量化交易（如财报、监管公告或预测市场）中，许多重大信息在公开披露时间戳 $t^{\star}$ 之前已被内幕或知情资金（Informed Flow）提前抢跑定价，若多模态新闻 Agent 在 $t^{\star}$ 才盲目追单，反而会成为知情资金止盈的接盘流动性。
+
+#### 💡 核心方法与数学公式 (Core Methodology & Formulation)
+* **测试时无金标脚手架自演化（TTHE Objective）**：
+  TTHE 将智能体脚手架分解为冻结的内核策略与可在线热更新的**接口适配与验证钩子（Mutable Verification Hooks $H _ t$ ）**。在测试期面对无标准答案的任务 $x$ 时，以工具执行的确定性语法/不变量异常率 $\mathcal{E} _ {\text{exec}}(\tau; H _ t)$ 作为自监督损失，在线合成并替换脚手架补丁：
+
+$$
+H _ {t+1} = \arg\min _ {H' \in \mathcal{N}(H _ t)} \left\lbrace \mathcal{E} _ {\text{exec}}\left( \tau(x, H') \right) + \beta \cdot \mathrm{DL}\left( H' \parallel H _ 0 \right) \right\rbrace
+$$
+
+* **信息论知情流泄漏分数（ForesightFlow Information Leakage Score, ILS）**：
+  设事件终端真实结算概率分布为 $P^{\star}$ ，事件公开披露时刻为 $t^{\star}$ ，观察窗口起点为 $t _ 0$ 。ForesightFlow 利用市场隐含概率轨迹 $P _ t$ 相对于终端状态 $P^{\star}$ 的 Kullback-Leibler 信息增益积分，严格定义事件披露前的**知情流信息抢跑比例（ILS）**：
+
+$$
+\mathrm{ILS}\left( t _ 0, t^{\star} \right) = 1 - \frac{\int _ {t _ 0}^{t^{\star}} \mathrm{KL}\left( P^{\star} \parallel P _ t \right) dt}{\left( t^{\star} - t _ 0 \right) \mathrm{KL}\left( P^{\star} \parallel P _ {t _ 0} \right) + \epsilon} \in [0, 1]
+$$
+
+  当 $\mathrm{ILS}(t _ 0, t^{\star}) \to 1$ 时，表明公开新闻发布前市场已通过知情交易完成了绝大部分价格发现，此时在新闻发布后追涨将面临极高的均值回归（Mean Reversion）风险。
+
+#### 📊 关键实验与结论 (Key Results & Conclusions)
+* **TTHE** 在 SWE-bench 与跨工具链评测中，无需任何测试集金标标签即可在线修复 73% 的环境与解析器异常，使零样本一次通过率提升 **+9.4%**；
+* **ForesightFlow** 对数千个真实宏观、科技监管与企业事件的交易流实证表明，高 $\mathrm{ILS}$ 事件在公告发布后的动量追随策略夏普比率为负，而引入 $\mathrm{ILS}$ 门禁过滤掉已被提前定价的新闻后，事件驱动策略净夏普比率提升 **+0.68**。
+
+#### 🔗 与我们工作（Our Works）的直接关联与落地启发 (Connection to Our Works)
+* **落地到 `TraceCraft` 与 `Better-Peer-Review`**：TTHE 的无金标执行异常驱动热更新 $H _ {t+1}$ 可直接嵌入 `TraceCraft` 的在线轨迹压缩器与 `Better-Peer-Review` 的多源审稿解析脚本中，实现测试期面对异构 LaTeX/JSON 格式时的零停机自愈。
+* **落地到 `stock_prediction` (`fin-skills`) 与 `MMAN`**：ForesightFlow 的知情流泄漏分数 $\mathrm{ILS}(t _ 0, t^{\star})$ 为我们的多模态新闻股票预测器（`MMAN`）与 `fin_skills/skills/market-making-models/`、`fin_skills/skills/llm-finance-agents/` 及 `fin_skills/skills/pre-trade-checks/` 提供了极其关键的**“新闻已被定价度（Priced-In Gate）”事前风控特征**——当检测到新闻披露前异常订单流已使 $\mathrm{ILS} > \tau _ {\text{priced}}$ 时，自动抑制多模态新闻动量追单信号，防止在消息兑现高点接盘！
+
+---
+
+> [!TIP]
+> **🎯 `stock_prediction` 仓库代码级落地点 (`Target Module`)**：`fin_skills/skills/pre-trade-checks/` & `fin_skills/skills/llm-finance-agents/` (Information Leakage Score ILS Priced-In Gate)  
+> **📚 上游精读归档 (`Upstream Source`)**：`scholar-odyssey/intelligence/papers/2026-09-28_ai_paper_notes.md`
+
+
+---
+
+### 2.2 [2026-09-27] SHAPE: Coalition-Aware Expert Pruning for Sparse Mixture-of-Experts LLMs
 
 * **论文信息**：`arXiv:2606.09886` (2026-06, 开源仓库：`github.com/Alizen-1009/Shapley-Moe`)
 * **核心关键词**：Sparse MoE、Cooperative Game Theory、Shapley Value Attribution、Coalition-Aware Expert Pruning、Quality-Coverage Bisection
@@ -133,7 +184,7 @@ $$
 
 ---
 
-### 2.2 [2026-09-27] L2R: Low-Rank and Lipschitz-Controlled Routing for Mixture-of-Experts
+### 2.3 [2026-09-27] L2R: Low-Rank and Lipschitz-Controlled Routing for Mixture-of-Experts
 
 * **论文信息**：Minghao Yang, Ren Togo, Guang Li, Takahiro Ogawa, Miki Haseyama (`arXiv:2601.21349`, 2026-01)
 * **核心关键词**：MoE Routing Geometry、Low-Rank Latent Space、Lipschitz Continuity、Saturated Inner-Product Scoring (SIPS)、Multi-Anchor Routing
@@ -226,7 +277,7 @@ $$
 
 ---
 
-### 2.3 [2026-09-27] OBCache: Optimal Brain KV Cache Pruning for Efficient Long-Context LLM Inference
+### 2.4 [2026-09-27] OBCache: Optimal Brain KV Cache Pruning for Efficient Long-Context LLM Inference
 
 * **论文信息**：Yuzhe Gu, Xiyu Liang, Jiaojiao Zhao, Enmao Diao (`arXiv:2510.07651`, **ICML 2026**)
 * **核心关键词**：KV Cache Eviction、Optimal Brain Damage (OBD)、Second-Order Taylor Perturbation、Output-Aware Saliency、Joint KV Pruning
@@ -321,7 +372,7 @@ $$
 
 ---
 
-### 2.4 [2026-09-27] AIDE²: Recursive Self-Improvement of AI Research Agents
+### 2.5 [2026-09-27] AIDE²: Recursive Self-Improvement of AI Research Agents
 
 * **论文信息**：Dhruv Srikanth, Bingchen Zhao, Dixing Xu, Yuxiang Wu, Zhengyao Jiang (`arXiv:2609.26457`, 2026-09)
 * **核心关键词**：Recursive Self-Improvement (RSI)、AI Research Agents、Meta-Harness Evolution、Anti-Reward-Hacking、Automated ML Engineering
@@ -397,7 +448,7 @@ $$
 
 ---
 
-### 2.5 [2026-09-27] RRSI: Regularized Recursive Self-Improvement of Agent Harnesses
+### 2.6 [2026-09-27] RRSI: Regularized Recursive Self-Improvement of Agent Harnesses
 
 * **论文信息**：Peng Xia, Rujun Han, Zifeng Wang, Yanfei Chen et al. (`arXiv:2609.24972`, 2026-09, Google Cloud AI Research & UNC)
 * **核心关键词**：Regularized RSI、Agent Harness Overfitting、Temporally Annealed Proposal Budget、Critic-Pruner Selection
@@ -474,7 +525,7 @@ $$
 
 ---
 
-### 2.6 [2026-09-25] How Pruning Attention Layers Affects Interpretability, Faithfulness, and Confidence Calibration
+### 2.7 [2026-09-25] How Pruning Attention Layers Affects Interpretability, Faithfulness, and Confidence Calibration
 
 * **论文信息**：`arXiv:2606.24970` (2026-06)
 * **核心关键词**：Attention Layer Pruning、Confidence Calibration (ECE)、Faithfulness、Overconfident Hallucination
@@ -536,7 +587,7 @@ $$
 
 ---
 
-### 2.7 [2026-09-25] Reward as an Agent (DynDiff-GRPO): Mitigating Reward Hacking in Embodied World Models
+### 2.8 [2026-09-25] Reward as an Agent (DynDiff-GRPO): Mitigating Reward Hacking in Embodied World Models
 
 * **论文信息**：`arXiv:2606.19842` (2026-06)
 * **核心关键词**：Reward as an Agent、Anti-Reward-Hacking、Embodied World Models、DynDiff-GRPO
@@ -586,7 +637,7 @@ $$
 
 ---
 
-### 2.8 [2026-09-25] SAC: Disaggregated KV Cache Architecture for Sparse Attention Serving over CXL
+### 2.9 [2026-09-25] SAC: Disaggregated KV Cache Architecture for Sparse Attention Serving over CXL
 
 * **论文信息**：`arXiv:2604.18392` (2026-04)
 * **核心关键词**：CXL 3.0 Memory Pooling、Disaggregated KV Cache、Sparse Attention Sub-Page Gather
@@ -635,7 +686,7 @@ $$
 
 ---
 
-### 2.9 [2026-09-21] SIFT: Recursive Self-Improvement via Fast Tree-Search
+### 2.10 [2026-09-21] SIFT: Recursive Self-Improvement via Fast Tree-Search
 
 * **论文信息**：`arXiv:2609.19526` (2026-09)
 * **核心关键词**：Sample-Efficient RSI、Fast Tree-Search、LLM-as-a-Judge Surrogate、Multi-Fidelity Evaluation
@@ -690,7 +741,7 @@ $$
 
 ---
 
-### 2.10 [2026-09-20] SHIFT-LLM: Distribution Shift Correction in Depth-Pruned LLMs
+### 2.11 [2026-09-20] SHIFT-LLM: Distribution Shift Correction in Depth-Pruned LLMs
 
 * **论文信息**：`arXiv:2608.25068` (2026-08)
 * **核心关键词**：Depth Pruning、Distribution Shift Correction、Linear Residual Adapters (LRA)、Closed-Form Ridge Regression、Weight Folding
@@ -755,7 +806,7 @@ $$
 
 ---
 
-### 2.11 [2026-09-20] CARE: Spend Experts Where You Are Unsure — Confidence-Adaptive Routing for MoE-LoRA
+### 2.12 [2026-09-20] CARE: Spend Experts Where You Are Unsure — Confidence-Adaptive Routing for MoE-LoRA
 
 * **论文信息**：`arXiv:2607.26052` (2026-07)
 * **核心关键词**：Confidence-Adaptive Routing、MoE-LoRA、Nucleus Expert Activation、Router Uncertainty Entropy
@@ -814,7 +865,7 @@ $$
 
 ---
 
-### 2.12 [2026-09-20] Minima-KV: Mixed-Format Paged Attention for Extreme KV Cache Compression
+### 2.13 [2026-09-20] Minima-KV: Mixed-Format Paged Attention for Extreme KV Cache Compression
 
 * **论文信息**：`arXiv:2608.23834` (2026-08)
 * **核心关键词**：Mixed-Precision KV Cache、PagedAttention、Sub-Page Bit-Packing、Reasoning Continuity
@@ -881,7 +932,7 @@ $$
 
 ---
 
-### 2.13 [2026-09-20] ModularRSI: Modular and Generalizable Recursive Harness Self-Improvement
+### 2.14 [2026-09-20] ModularRSI: Modular and Generalizable Recursive Harness Self-Improvement
 
 * **论文信息**：`arXiv:2609.14857` (2026-09)
 * **核心关键词**：Modular Agent Harness、Compositional RSI、Interface-Constrained Evolution、Cross-Domain Generalization
@@ -939,7 +990,7 @@ $$
 
 ---
 
-### 2.14 [2026-09-19] WRP: Forward-Free LLM Depth Pruning via Weight Redundancy
+### 2.15 [2026-09-19] WRP: Forward-Free LLM Depth Pruning via Weight Redundancy
 
 * **论文信息**：`arXiv:2609.09883` (2026-09)
 * **核心关键词**：Forward-Free Depth Pruning、Weight Redundancy、Spectral Subspace Alignment、Calibration-Free Layer Dropping
@@ -1006,7 +1057,7 @@ $$
 
 ---
 
-### 2.15 [2026-09-19] Dream-RSI: Recursive Self-Improvement through Evolving Worlds
+### 2.16 [2026-09-19] Dream-RSI: Recursive Self-Improvement through Evolving Worlds
 
 * **论文信息**：Tong Zheng, Xidong Wu, Zheng Zhang, Zhankui He et al. (`arXiv:2609.14858`, 2026-09)
 * **核心关键词**：Recursive Self-Improvement、World Model Replay Simulator、Off-Policy Dreaming、Discovery Tree Evolution
