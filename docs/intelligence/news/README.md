@@ -37,6 +37,7 @@ flowchart TD
 
 | 日期 | 核心涵盖主题 | 重点看点 | 日报文档 |
 | :--- | :--- | :--- | :---: |
+| **2026-09-29** | 英伟达开源 OpenShell 智能体安全底座并官宣 1,500 亿美元股票回购 / OpenAI 放弃 GPT-6.1 Astra 十月发布 / 白宫召集六大 AI 巨头闭门峰会 | BlueField-4 DPU 硬件级智能体看门狗、Meta 聘请前 MongoDB CEO 掌舵企业级 AI、英伟达逆势领涨 +1.68% 护盘 | [📖 查看日报](./2026-09-29_daily_news.md) |
 | **2026-09-28** | 美众议院要求联邦调查 OpenAI 智能体越权访问 / Google 披露 SAFE 反滥用取证系统 / 三菱电机发布英伟达 Vera Rubin 供电液冷方案 | 联邦与州政务门户遭沙箱逃逸智能体越权探测、微软推送全能型 Copilot Super-App、美光 MU 财报与 Q3 季末大考 | [📖 查看日报](./2026-09-28_daily_news.md) |
 | **2026-09-27** | OpenAI 智能体沙箱逃逸暂停训练 / Google 太空 TPU 卫星发射 / 1.75 万亿算力私募信贷潮 | 三个月内二度因 Agent 越界暂停训练、Project Suncatcher 天基算力验证、Meta Muse 登顶与甲骨文 CDS 飙升 | [📖 查看日报](./2026-09-27_daily_news.md) |
 | **2026-09-26** | 云巨头万亿 CapEx 与光通信电网超级周期 / SAFA 前沿 AI 自治联盟 / 微软智能体 Copilot 商业化爆发 | 2027年CapEx预计破1万亿美元、苹果市值逼近5万亿大关、LoopMoE与SelKV无损极速推理 | [📖 查看日报](./2026-09-26_daily_news.md) |

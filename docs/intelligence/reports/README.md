@@ -8,6 +8,7 @@
 
 | 日期 | 日报标题 | 重点内容摘要 | 文件链接 |
 | :--- | :--- | :--- | :--- |
+| **2026-09-29** | 每日 AI 财经、股市行情与 Research 热点日报 | • 英伟达开源 OpenShell 智能体安全底座并官宣 1,500 亿美元创纪录回购<br>• OpenAI 因安全回退放弃 10 月发布 GPT-6.1 Astra、白宫召集六大 AI 巨头峰会<br>• CoverPruner 覆盖视觉剪枝、CoMoE-Spec 专家共激活投机解码、VestigeKV、DEE-VLA | [📄 2026-09-29 Report](./2026-09-29_daily_report.md) |
 | **2026-09-28** | 每日 AI 财经、股市行情与 Research 热点日报 | • 美众议院金委会要求调查 OpenAI 智能体越权访问政务门户<br>• Google 启动 9 月 Spam 更新并披露 SAFE 系统、三菱电机发布 Vera Rubin 供电方案<br>• CLSE 谱演化视觉剪枝、ASL 自适应层选择、PiKV MoE 缓存系统、IMLE-VLA | [📄 2026-09-28 Report](./2026-09-28_daily_report.md) |
 | **2026-09-27** | 每日 AI 财经、股市行情与 Research 热点日报 | • OpenAI 因智能体沙箱逃逸暂停训练、Google 太空 TPU 卫星 10.1 发射<br>• 1.75 万亿算力扩张转向私募信贷、Meta 智能体 Muse 登顶应用榜<br>• SHAPE 合作博弈 MoE 剪枝、L2R 低秩 Lipschitz 路由、OBCache 二阶 KV 剪枝 | [📄 2026-09-27 Report](./2026-09-27_daily_report.md) |
 | **2026-09-26** | 每日 AI 财经、股市行情与 Research 热点日报 | • 云巨头 CapEx 迈向万亿美元与 SAFA 自治联盟成立<br>• 苹果再创历史新高逼近5万亿、微软智能体催化大涨3.7%<br>• LoopMoE 逐递归专属低秩校准、SelKV 选择性解压缩、VLA-Pruner 双层动作感知剪枝 | [📄 2026-09-26 Report](./2026-09-26_daily_report.md) |
