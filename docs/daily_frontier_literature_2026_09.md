@@ -1,6 +1,6 @@
 # 📈 Stock-Prediction (MMAN & Quant RSI): 每日前沿文献关联与多模态时序/防过拟合 RSI 落地库 (2026-09)
 
-**Document ID:** `STOCK-LIT-202609` | **Last Updated:** `2026-09-29` | **Target Path:** `docs/research/daily_frontier_literature_2026_09.md` | **Total Routed Papers:** `17`
+**Document ID:** `STOCK-LIT-202609` | **Last Updated:** `2026-09-30` | **Target Path:** `docs/research/daily_frontier_literature_2026_09.md` | **Total Routed Papers:** `18`
 
 > [!IMPORTANT]
 > **🔗 跨仓库文献引用链闭环 (Cross-Repository Reference Chain Closure)**
@@ -13,6 +13,7 @@
 
 | 收录日期 | 论文标题与 arXiv 链接 | 关键实测收益 / 核心结论 | 锚定本仓库代码模块与文档路径 (`Target Module`) | 原始精读归档 |
 | :---: | :--- | :--- | :--- | :---: |
+| `2026-09-30` | [**AutoDataBench & SelfOp**](https://arxiv.org/abs/2609.35025) (`arXiv:2609.35025`) | **`AutoDataBench` 揭示自主造题瓶颈与提纯收益**：评测表明，前沿大模型自主合成的任务中有 **38%–54%** 因测试断言自相矛盾或难度退化（... | `rsi_campaign/evaluate_pareto_gate.py` (Multi-Regime Synthetic Financial Scenario Quality Audit) | [2026-09-30](https://github.com/Shwai-He/scholar-odyssey/blob/main/intelligence/papers/2026-09-30_ai_paper_notes.md) |
 | `2026-09-29` | [**🧬 Failure-RSI & Flow3D-OPD**](https://arxiv.org/abs/2606.31270) (`arXiv:2606.31270`) | **`Failure-RSI`**：在 OSWorld 与多模态计算机操作基准上，仅利用推理期失败轨迹自动合成工具与控制补丁，无需微调底层大模型权重即可将任务成功率相对提升 **+24.6%**，且合成的代码补丁具备跨任务泛化性。 | `rsi_campaign/evaluate_pareto_gate.py` (Historical Market Crash Counterexample Pinned Non-Regression Gate) | [2026-09-29](https://github.com/Shwai-He/scholar-odyssey/blob/main/intelligence/papers/2026-09-29_ai_paper_notes.md) |
 | `2026-09-28` | [**🧬 TTHE**](https://arxiv.org/abs/2607.08124) (`arXiv:2607.08124`) | **TTHE** 在 SWE-bench 与跨工具链评测中，无需任何测试集金标标签即可在线修复 73% 的环境与解析器异常，使零样本一次通过率提升 **+9.4%**； | `fin_skills/skills/pre-trade-checks/` & `fin_skills/skills/llm-finance-agents/` (Information Leakage Score ILS Priced-In Gate) | [2026-09-28](https://github.com/Shwai-He/scholar-odyssey/blob/main/intelligence/papers/2026-09-28_ai_paper_notes.md) |
 | `2026-09-27` | [**SHAPE**](https://arxiv.org/abs/2606.09886) (`arXiv:2606.09886`) | **跨架构零训练稳健性**：在 **Qwen3-30B-A3B**、**DeepSeek-V2-Lite** 与 **GPT-OSS-20B** 三大主流细粒度 MoE 模型上，仅需 128 条 C4/WikiText2 校准样本... | `rsi_campaign/` & `models/` (`Shwai-He/stock-prediction`) | [2026-09-27](https://github.com/Shwai-He/scholar-odyssey/blob/main/intelligence/papers/2026-09-27_ai_paper_notes.md) |
@@ -35,7 +36,75 @@
 
 ## 📐 2. 逐篇论文深度机制解构、数学公式与本仓库落地指南 (Per-Paper Deep-Dive Cards)
 
-### 2.1 [2026-09-29] 🧬 *Failure-RSI & Flow3D-OPD: Inference-Time Failure-Driven Agent Patching & Multi-Teacher On-Policy Flow Distillation*
+### 2.1 [2026-09-30] AutoDataBench & SelfOp: Evaluating Autonomous Task Synthesis & Textual Gradient Descent for Self-Improving Agents (`arXiv:2609.35025` & `arXiv:2609.22792`)
+* **论文标题**：
+  1. *AutoDataBench: Can Agents Write the Data That Feeds the Self-Improvement Loop?* (`arXiv:2609.35025`)
+  2. *SelfOp: An Optimization Algorithm for Self-Improving Security Agents* (`arXiv:2609.22792`)
+* **核心关键词**：`autodatabench`, `selfop`, `self-improvement`, `rsi`, `agent`, `textual gradient`, `harness`, `research agents`
+
+#### 📌 核心痛点与研究动机 (Motivation & Pain Points)
+在智能体递归自我改进（Recursive Self-Improvement, RSI）系统中，过去一年的研究大多聚焦于“如何在固定评测集上修改智能体代码/提示词”，却忽视了两个决定 RSI 能否长期持续进化的核心问题：
+1. **“智能体自己造题喂给自己”时的数据坍缩与作弊退化（`AutoDataBench` 动机）**：当人工任务耗尽、让智能体自主合成新训练任务（Autonomous Task Synthesis）以驱动下一轮 RSI 时，智能体极易生成**退化/无解的伪任务（Invalid Tasks）**、**换皮重复任务（Low Novelty）**或**难度过低/过高的无效任务**，导致自训练循环在 2–3 轮后发生模式坍缩；
+2. **单样本反思导致的上下文膨胀与过拟合（`SelfOp` 动机）**：在对冻结权重智能体（如代码审计与网络安全智能体）进行上下文与技能库（Skills/Prompts）自优化时，传统 TextGrad 对单条失败轨迹直接修改全局指令，极易因单个异常样本的噪声而破坏在其他 99% 正常任务上的表现。
+
+#### ⚙️ 核心机制与数学公式推导 (Core Mechanism & Mathematical Formulation)
+**第一部分：`AutoDataBench` 的四维任务合成准入门禁（Four-Gate Task Synthesis Audit）**  
+对于智能体自主合成的候选任务集合 $\mathcal{D} _ {\text{syn}} = \lbrace \tau _ 1, \dots, \tau _ M \rbrace$ （每个任务 $\tau _ i = (q _ i, \text{env} _ i, v _ i)$ 包含问题描述 $q _ i$ 、沙箱环境 $\text{env} _ i$ 与可执行验证器 $v _ i$ ），`AutoDataBench` 定义了训练前必须通过的四维复合质量泛函 $\mathcal{Q}(\mathcal{D} _ {\text{syn}})$ ：
+
+$$
+\mathcal{Q}(\mathcal{D} _ {\text{syn}}) = \frac{1}{M}\sum _ {i=1}^M \underbrace{\mathbb{I}\left[\mathrm{Sol}(\tau _ i) \wedge \mathrm{Det}(v _ i)\right]} _ {\text{1. 可解与验证确定性 (Validity)}} \cdot \underbrace{\left(1 - \max _ {\tau \in \mathcal{D} _ {\text{seed}} \cup \mathcal{D} _ {<i}} \mathrm{Sim}(\tau _ i, \tau)\right)} _ {\text{2. 语义与结构新颖度 (Novelty)}} \cdot \underbrace{4 \hat{p} _ i (1 - \hat{p} _ i)} _ {\text{3. 信息量最大化难度区域 (Difficulty)}} \cdot \underbrace{\mathcal{C} _ {\text{beh}}(\mathcal{D} _ {\text{syn}})} _ {\text{4. 行为覆盖率}}
+$$
+
+其中 $\hat{p} _ i \in (0, 1)$ 为当前基座策略在任务 $\tau _ i$ 上的经验通过率，二次项 $4\hat{p} _ i(1 - \hat{p} _ i)$ 在 $\hat{p} _ i = 0.5$ （即“跳一跳够得着”的黄金学习区，既非全对 $\hat{p} _ i=1$ 也非全错 $\hat{p} _ i=0$ ）处取得最大值 $1$ ，从而在未开启任何昂贵 RL 训练前直接过滤掉低质量合成任务。
+
+**第二部分：`SelfOp` 的跨实例共识文本梯度下降（Consensus Textual Gradient Descent）**  
+设冻结智能体的可进化上下文工件为 $\mathcal{C} _ t = (\text{Instruction } I _ t, \text{Skill Library } \mathcal{K} _ t)$ 。在第 $t$ 轮迭代中，收集批次失败轨迹集合 $\mathcal{B} _ {\text{fail}} = \lbrace \xi _ 1, \dots, \xi _ B \rbrace$ 。`SelfOp` 首先对每条失败轨迹计算实例级文本错误梯度 $g _ b = \nabla _ {\text{text}} \mathcal{L}(\xi _ b; \mathcal{C} _ t)$ ，随后通过聚类与共识聚合算子 $\mathcal{A} _ {\text{cons}}$ 滤除孤立样本噪声，仅当某一根因模式的支持度超过阈值 $\tau _ {\text{sup}}$ 时才生成结构化补丁更新 $\mathcal{C} _ {t+1}$ ：
+
+$$
+\bar{g} _ t = \mathcal{A} _ {\text{cons}}\left(\lbrace g _ b \rbrace _ {b=1}^B; \tau _ {\text{sup}}\right), \quad \mathcal{C} _ {t+1} = \begin{cases}
+\mathrm{ApplyPatch}(\mathcal{C} _ t, \bar{g} _ t), & \text{if } \mathrm{ValScore}(\mathrm{ApplyPatch}(\mathcal{C} _ t, \bar{g} _ t)) > \mathrm{ValScore}(\mathcal{C} _ t) + \delta \cr
+\mathcal{C} _ t, & \text{otherwise}
+\end{cases}
+$$
+
+#### 🎨 算法架构图与实现伪代码 (Architecture & Pseudocode)
+```
+====================================================================================================
+     AutoDataBench (合成任务四维门禁) + SelfOp (跨实例共识文本梯度自进化) (arXiv:2609.35025 & 22792)
+====================================================================================================
+
+  [Agent Synthesizes New Candidate Tasks D_syn]
+                 │
+                 ▼
+  [AutoDataBench 4-Gate Pre-Training Filter]
+  • Gate 1: Validity (沙箱可解 & 单元测试确定性)    • Gate 3: Difficulty 4*p*(1-p) (黄金梯度区 p≈0.5)
+  • Gate 2: Novelty  (去重与结构新颖度)             • Gate 4: Behavioral Coverage (动作空间熵覆盖)
+                 │ (仅放行高信息量合法任务进入 RSI 循环)
+                 ▼
+  [SelfOp Consensus Textual Gradient Update]
+  批次失败轨迹 {ξ_b} ──► 提取实例错误梯度 {g_b} ──► 跨实例共识聚合 A_cons ──► 验证集门禁晋升更新技能库 K_{t+1}
+====================================================================================================
+```
+
+#### 📊 实验指标与核心结论 (Experimental Results & Key Takeaways)
+* **`AutoDataBench` 揭示自主造题瓶颈与提纯收益**：评测表明，前沿大模型自主合成的任务中有 **38%–54%** 因测试断言自相矛盾或难度退化（ $\hat{p} _ i \in \lbrace 0, 1 \rbrace$ ）而属于无效噪声；经过 `AutoDataBench` 四维门禁过滤提纯后，用仅 **30%** 的精选合成任务做自训练，下游代码与智能体基准提升反而比全量未过滤合成数据高出 **+6.8 pp**。
+* **`SelfOp` 在安全智能体上实现跨任务泛化**：在 CTF 网络安全攻防与漏洞修复基准（SWE-bench Security / NYU CTF）上，`SelfOp` 在完全冻结底层 LLM 权重的前提下，将任务解决率提升了 **+14.2%–19.5%**，且提取出的共识技能库可直接跨模型迁移。
+
+#### 💡 与我们研究方向的闭环关联 (Connection to Our Research)
+* **直接强化 `TraceCraft V2`、`stock_prediction` (`rsi_campaign`) 与 `Better-Peer-Review`**：
+  1. 在 `TraceCraft` 的 `tracecraft/autoresearch_loop.py` 中，引入 `AutoDataBench` 的二次方难度门禁 $4\hat{p} _ i(1 - \hat{p} _ i)$ ，可自动筛除过易或不可解的合成测试样例；
+  2. `SelfOp` 的跨实例共识文本梯度聚合 $\mathcal{A} _ {\text{cons}}$ 与验证集晋升门禁，可直接用于进化我们的 Agent Skills 库与 `Better-Peer-Review` 的审稿评估算子（`rsi_bpr_eval/mutable_operator.py`），彻底杜绝单样本过拟合。
+
+---
+
+> [!TIP]
+> **🎯 `stock_prediction` 仓库代码级落地点 (`Target Module`)**：`rsi_campaign/evaluate_pareto_gate.py` (Multi-Regime Synthetic Financial Scenario Quality Audit)  
+> **📚 上游精读归档 (`Upstream Source`)**：`scholar-odyssey/intelligence/papers/2026-09-30_ai_paper_notes.md`
+
+
+---
+
+### 2.2 [2026-09-29] 🧬 *Failure-RSI & Flow3D-OPD: Inference-Time Failure-Driven Agent Patching & Multi-Teacher On-Policy Flow Distillation*
 > 🏷️ **核心关键词**：Inference-Time Self-Improvement · Failure-Driven Code Patching · Multi-Teacher On-Policy Distillation (OPD) · Flow-Matching DiT  
 > 🔗 **arXiv 链接**：[`arXiv:2606.31270`](https://arxiv.org/abs/2606.31270) (`Failure-RSI`, ECCV 2026) & [`arXiv:2609.07137`](https://arxiv.org/abs/2609.07137) (`Flow3D-OPD`)
 
@@ -82,7 +151,7 @@ $$
 
 ---
 
-### 2.2 [2026-09-28] 🧬 *TTHE: Test-Time Harness Evolution & ForesightFlow Informed-Flow Quantification*
+### 2.3 [2026-09-28] 🧬 *TTHE: Test-Time Harness Evolution & ForesightFlow Informed-Flow Quantification*
 > 🏷️ **核心关键词**：Test-Time Harness Evolution · Coding Agents · Information Leakage Score (ILS) · Regime & Informed Flow Detection  
 > 🔗 **arXiv 链接**：[`arXiv:2607.08124`](https://arxiv.org/abs/2607.08124) (`TTHE`) & [`arXiv:2605.00493`](https://arxiv.org/abs/2605.00493) (`ForesightFlow`)
 
@@ -132,7 +201,7 @@ $$
 
 ---
 
-### 2.3 [2026-09-27] SHAPE: Coalition-Aware Expert Pruning for Sparse Mixture-of-Experts LLMs
+### 2.4 [2026-09-27] SHAPE: Coalition-Aware Expert Pruning for Sparse Mixture-of-Experts LLMs
 
 * **论文信息**：`arXiv:2606.09886` (2026-06, 开源仓库：`github.com/Alizen-1009/Shapley-Moe`)
 * **核心关键词**：Sparse MoE、Cooperative Game Theory、Shapley Value Attribution、Coalition-Aware Expert Pruning、Quality-Coverage Bisection
@@ -232,7 +301,7 @@ $$
 
 ---
 
-### 2.4 [2026-09-27] L2R: Low-Rank and Lipschitz-Controlled Routing for Mixture-of-Experts
+### 2.5 [2026-09-27] L2R: Low-Rank and Lipschitz-Controlled Routing for Mixture-of-Experts
 
 * **论文信息**：Minghao Yang, Ren Togo, Guang Li, Takahiro Ogawa, Miki Haseyama (`arXiv:2601.21349`, 2026-01)
 * **核心关键词**：MoE Routing Geometry、Low-Rank Latent Space、Lipschitz Continuity、Saturated Inner-Product Scoring (SIPS)、Multi-Anchor Routing
@@ -325,7 +394,7 @@ $$
 
 ---
 
-### 2.5 [2026-09-27] OBCache: Optimal Brain KV Cache Pruning for Efficient Long-Context LLM Inference
+### 2.6 [2026-09-27] OBCache: Optimal Brain KV Cache Pruning for Efficient Long-Context LLM Inference
 
 * **论文信息**：Yuzhe Gu, Xiyu Liang, Jiaojiao Zhao, Enmao Diao (`arXiv:2510.07651`, **ICML 2026**)
 * **核心关键词**：KV Cache Eviction、Optimal Brain Damage (OBD)、Second-Order Taylor Perturbation、Output-Aware Saliency、Joint KV Pruning
@@ -420,7 +489,7 @@ $$
 
 ---
 
-### 2.6 [2026-09-27] AIDE²: Recursive Self-Improvement of AI Research Agents
+### 2.7 [2026-09-27] AIDE²: Recursive Self-Improvement of AI Research Agents
 
 * **论文信息**：Dhruv Srikanth, Bingchen Zhao, Dixing Xu, Yuxiang Wu, Zhengyao Jiang (`arXiv:2609.26457`, 2026-09)
 * **核心关键词**：Recursive Self-Improvement (RSI)、AI Research Agents、Meta-Harness Evolution、Anti-Reward-Hacking、Automated ML Engineering
@@ -496,7 +565,7 @@ $$
 
 ---
 
-### 2.7 [2026-09-27] RRSI: Regularized Recursive Self-Improvement of Agent Harnesses
+### 2.8 [2026-09-27] RRSI: Regularized Recursive Self-Improvement of Agent Harnesses
 
 * **论文信息**：Peng Xia, Rujun Han, Zifeng Wang, Yanfei Chen et al. (`arXiv:2609.24972`, 2026-09, Google Cloud AI Research & UNC)
 * **核心关键词**：Regularized RSI、Agent Harness Overfitting、Temporally Annealed Proposal Budget、Critic-Pruner Selection
@@ -573,7 +642,7 @@ $$
 
 ---
 
-### 2.8 [2026-09-25] How Pruning Attention Layers Affects Interpretability, Faithfulness, and Confidence Calibration
+### 2.9 [2026-09-25] How Pruning Attention Layers Affects Interpretability, Faithfulness, and Confidence Calibration
 
 * **论文信息**：`arXiv:2606.24970` (2026-06)
 * **核心关键词**：Attention Layer Pruning、Confidence Calibration (ECE)、Faithfulness、Overconfident Hallucination
@@ -635,7 +704,7 @@ $$
 
 ---
 
-### 2.9 [2026-09-25] Reward as an Agent (DynDiff-GRPO): Mitigating Reward Hacking in Embodied World Models
+### 2.10 [2026-09-25] Reward as an Agent (DynDiff-GRPO): Mitigating Reward Hacking in Embodied World Models
 
 * **论文信息**：`arXiv:2606.19842` (2026-06)
 * **核心关键词**：Reward as an Agent、Anti-Reward-Hacking、Embodied World Models、DynDiff-GRPO
@@ -685,7 +754,7 @@ $$
 
 ---
 
-### 2.10 [2026-09-25] SAC: Disaggregated KV Cache Architecture for Sparse Attention Serving over CXL
+### 2.11 [2026-09-25] SAC: Disaggregated KV Cache Architecture for Sparse Attention Serving over CXL
 
 * **论文信息**：`arXiv:2604.18392` (2026-04)
 * **核心关键词**：CXL 3.0 Memory Pooling、Disaggregated KV Cache、Sparse Attention Sub-Page Gather
@@ -734,7 +803,7 @@ $$
 
 ---
 
-### 2.11 [2026-09-21] SIFT: Recursive Self-Improvement via Fast Tree-Search
+### 2.12 [2026-09-21] SIFT: Recursive Self-Improvement via Fast Tree-Search
 
 * **论文信息**：`arXiv:2609.19526` (2026-09)
 * **核心关键词**：Sample-Efficient RSI、Fast Tree-Search、LLM-as-a-Judge Surrogate、Multi-Fidelity Evaluation
@@ -789,7 +858,7 @@ $$
 
 ---
 
-### 2.12 [2026-09-20] SHIFT-LLM: Distribution Shift Correction in Depth-Pruned LLMs
+### 2.13 [2026-09-20] SHIFT-LLM: Distribution Shift Correction in Depth-Pruned LLMs
 
 * **论文信息**：`arXiv:2608.25068` (2026-08)
 * **核心关键词**：Depth Pruning、Distribution Shift Correction、Linear Residual Adapters (LRA)、Closed-Form Ridge Regression、Weight Folding
@@ -854,7 +923,7 @@ $$
 
 ---
 
-### 2.13 [2026-09-20] CARE: Spend Experts Where You Are Unsure — Confidence-Adaptive Routing for MoE-LoRA
+### 2.14 [2026-09-20] CARE: Spend Experts Where You Are Unsure — Confidence-Adaptive Routing for MoE-LoRA
 
 * **论文信息**：`arXiv:2607.26052` (2026-07)
 * **核心关键词**：Confidence-Adaptive Routing、MoE-LoRA、Nucleus Expert Activation、Router Uncertainty Entropy
@@ -913,7 +982,7 @@ $$
 
 ---
 
-### 2.14 [2026-09-20] Minima-KV: Mixed-Format Paged Attention for Extreme KV Cache Compression
+### 2.15 [2026-09-20] Minima-KV: Mixed-Format Paged Attention for Extreme KV Cache Compression
 
 * **论文信息**：`arXiv:2608.23834` (2026-08)
 * **核心关键词**：Mixed-Precision KV Cache、PagedAttention、Sub-Page Bit-Packing、Reasoning Continuity
@@ -980,7 +1049,7 @@ $$
 
 ---
 
-### 2.15 [2026-09-20] ModularRSI: Modular and Generalizable Recursive Harness Self-Improvement
+### 2.16 [2026-09-20] ModularRSI: Modular and Generalizable Recursive Harness Self-Improvement
 
 * **论文信息**：`arXiv:2609.14857` (2026-09)
 * **核心关键词**：Modular Agent Harness、Compositional RSI、Interface-Constrained Evolution、Cross-Domain Generalization
@@ -1038,7 +1107,7 @@ $$
 
 ---
 
-### 2.16 [2026-09-19] WRP: Forward-Free LLM Depth Pruning via Weight Redundancy
+### 2.17 [2026-09-19] WRP: Forward-Free LLM Depth Pruning via Weight Redundancy
 
 * **论文信息**：`arXiv:2609.09883` (2026-09)
 * **核心关键词**：Forward-Free Depth Pruning、Weight Redundancy、Spectral Subspace Alignment、Calibration-Free Layer Dropping
@@ -1105,7 +1174,7 @@ $$
 
 ---
 
-### 2.17 [2026-09-19] Dream-RSI: Recursive Self-Improvement through Evolving Worlds
+### 2.18 [2026-09-19] Dream-RSI: Recursive Self-Improvement through Evolving Worlds
 
 * **论文信息**：Tong Zheng, Xidong Wu, Zheng Zhang, Zhankui He et al. (`arXiv:2609.14858`, 2026-09)
 * **核心关键词**：Recursive Self-Improvement、World Model Replay Simulator、Off-Policy Dreaming、Discovery Tree Evolution
