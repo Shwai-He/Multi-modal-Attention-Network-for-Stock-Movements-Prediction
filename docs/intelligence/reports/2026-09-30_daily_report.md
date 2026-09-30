@@ -38,7 +38,24 @@
 
 ---
 
-## 📈 板块二：全球科技与核心股市行情 (Global Tech & Stock Market)
+## 🔎 数据口径与后续观察（2026-09-30 补记）
+
+产业消息的来源与待补证项见[同日新闻来源补记](../news/2026-09-30_daily_news.md)。正文行情尚未逐项核对历史数据；下表标普涨跌幅区间不能作为单一收盘值引用，应暂标为待核验。后续统一采用 2026-09-29 美东常规交易时段收盘、美元计价，记录数据提供方和复权口径，并按 `(本日收盘 / 前日收盘 - 1) × 100%` 复算涨跌幅。
+
+**财务解释补充**：净亏损、非现金会计计提和经营现金流不能混为一谈；采购承诺不能直接等同供应商已确认收入、现金到账或全部 RPO。融资目标估值不等于融资完成。正文这些财务数字仍需原始披露支持，资金流与行业胜负的解释属于分析推断。
+
+| 观察方向 | 下一步证据 | 检验目标 |
+| :--- | :--- | :--- |
+| 美光财报 | [官方季度业绩](https://investors.micron.com/financials/quarterly-results/default.aspx)中的实际营收、毛利率、CapEx、自由现金流和下一季指引；与发布前预期分列 | HBM 需求是否转化为盈利与现金流 |
+| 算力投资回报 | 云厂商实际 CapEx、折旧、AI 收入定义及利用率；区分报告期和预测年度 | 收入是否匹配资本投入；机构情景测算不能当作已实现市场规模 |
+| 智能体商业化 | 付费留存、成功任务成本、人工复核率、权限事故及价格原文 | 发布和降价能否改善实际任务成本与可靠性 |
+| 研究落地 | [同日论文的来源核验与复现建议](../papers/2026-09-30_ai_paper_notes.md) | 摘要主张能否在目标数据、硬件与负载下重现 |
+
+---
+
+## 📈 板块二：股票市场行情 (Stock Markets)
+
+> **覆盖补记**：本日已有行情仅覆盖美股科技与 AI 公司，尚不能代表三地全市场。后续按[市场覆盖规范](./MARKET_COVERAGE.md)增加 A 股、港股、非科技行业和市场广度；本次只补充框架与国内公司候选池，未取得当日国内行情，不填入未经核验的价格。
 
 ### 🌎 1. 美股三大指数周二收盘表现（2026-09-29 Close）
 在 Q3 季末倒数第二个交易日，受長端美债收益率高位震荡、中东地缘局势谨慎情绪以及苹果（`AAPL`）、英伟达（`NVDA`）季末再平衡获利回吐拖累，美股三大指数延续温和震荡整理，但内部呈现显著的**“高低切换”（前期超跌的 `ORCL`、`META` 与定制芯片 `AVGO` 逆势领涨）**：
@@ -69,7 +86,7 @@
 今日精选 6 项 2026 年 9 月底最新 arXiv 前沿突破，严格遵循**双轨制（个人研究强相关 + 全球前沿热点）**，完整数学推导、算法伪代码与全量 22 个仓库代码级落地映射详见同日《[2026-09-30 AI 前沿论文深度精读笔记](../papers/2026-09-30_ai_paper_notes.md)》：
 
 ### 🎯 轨道一：个人研究强相关精选 (Personalized Focus)
-1. ✂️ **ACPruner & SCOPD: Visual Token Pruning as Biased Attention Coverage Maximization & Sparse-Context On-Policy Self-Distillation** (`arXiv:2609.34558` & `arXiv:2609.33918`)
+1. ✂️ **ACPruner & SCOPD: Visual Token Pruning as Biased Attention Coverage Maximization & Sparse-Context On-Policy Self-Distillation** (`arXiv:2609.34558` & `arXiv:2609.34044`)
    * 💡 **核心突破**：针对多模态大模型（LVLM）激进视觉 Token 剪枝中的两大核心痛点——“无偏集合覆盖丢失指令焦点”与“剪枝后模型不会利用稀疏剩余上下文（表征-利用鸿沟 Representation-Utilization Gap）”，**`ACPruner`** 提出**偏置注意力覆盖最大化（Biased Attention Coverage Maximization）**，将跨模态指令注意力显著性与局部高斯核空间覆盖统一为单调次模函数优化；**`SCOPD`** 则首创**稀疏上下文在线自蒸馏（Sparse-Context On-Policy Self-Distillation）**，令学生在剪枝后的稀疏视觉上下文上自回归采样推理轨迹，并由共享权重的全上下文教师在线对齐逐 Token 分布，无需外部标注即可在 85%–90% 剪枝率下恢复 **99%+** 原始精度。
 2. 🧩 **SlimWise & CascadeEP: Decoupling Expert Pruning Across Prefill/Decode & Asynchronous MoE Execution under Attention Imbalance** (`arXiv:2609.34117` & `arXiv:2609.33252`)
    * 💡 **核心突破**：直击稀疏 MoE 服务中 Prefill（计算密集）与 Decode（显存带宽受限）的物理不对称性：**`SlimWise`** 提出**跨阶段解耦专家剪枝**——在 Prefill 阶段使用全量专家以保证 KV 缓存语义完整性，在 Decode 阶段切换至结构化剪枝后的轻量专家子集并直接零转换复用 Prefill KV Cache，辅以轻量级跨阶段适配蒸馏，将解码吞吐提升 **1.65×–2.10×**；**`CascadeEP`** 则针对多模态/长上下文 Prefill 阶段不同 DP 分片注意力耗时不均导致的专家并行（EP）全对全同步空泡，设计了 **`streamFFN` 流式分批执行**与**机会主义专家权重预取（OEWF）**，将首字延迟（TTFT）降低 **34%–48%**。
