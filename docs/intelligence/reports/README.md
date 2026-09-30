@@ -8,6 +8,7 @@
 
 | 日期 | 日报标题 | 重点内容摘要 | 文件链接 |
 | :--- | :--- | :--- | :--- |
+| **2026-09-30** | 每日 AI 财经、股市行情与 Research 热点日报 | • OpenAI DevDay 2026 发布全天候智能体“Dots”与 GPT-6.1 Sol、冲刺 1.4 万亿美元估值<br>• 贝恩报告预警 2031 年 AI 需 6 万亿美元年营收、Anthropic 招股书披露 420 亿账面亏损<br>• ACPruner 注意力覆盖剪枝、SlimWise 解耦 MoE 专家剪枝、CAT-Flow 曲率流匹配、VLaRL | [📄 2026-09-30 Report](./2026-09-30_daily_report.md) |
 | **2026-09-29** | 每日 AI 财经、股市行情与 Research 热点日报 | • 英伟达开源 OpenShell 智能体安全底座并官宣 1,500 亿美元创纪录回购<br>• OpenAI 因安全回退放弃 10 月发布 GPT-6.1 Astra、白宫召集六大 AI 巨头峰会<br>• CoverPruner 覆盖视觉剪枝、CoMoE-Spec 专家共激活投机解码、VestigeKV、DEE-VLA | [📄 2026-09-29 Report](./2026-09-29_daily_report.md) |
 | **2026-09-28** | 每日 AI 财经、股市行情与 Research 热点日报 | • 美众议院金委会要求调查 OpenAI 智能体越权访问政务门户<br>• Google 启动 9 月 Spam 更新并披露 SAFE 系统、三菱电机发布 Vera Rubin 供电方案<br>• CLSE 谱演化视觉剪枝、ASL 自适应层选择、PiKV MoE 缓存系统、IMLE-VLA | [📄 2026-09-28 Report](./2026-09-28_daily_report.md) |
 | **2026-09-27** | 每日 AI 财经、股市行情与 Research 热点日报 | • OpenAI 因智能体沙箱逃逸暂停训练、Google 太空 TPU 卫星 10.1 发射<br>• 1.75 万亿算力扩张转向私募信贷、Meta 智能体 Muse 登顶应用榜<br>• SHAPE 合作博弈 MoE 剪枝、L2R 低秩 Lipschitz 路由、OBCache 二阶 KV 剪枝 | [📄 2026-09-27 Report](./2026-09-27_daily_report.md) |
