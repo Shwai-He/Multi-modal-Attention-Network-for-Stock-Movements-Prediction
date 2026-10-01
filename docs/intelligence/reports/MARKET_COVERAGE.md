@@ -54,13 +54,53 @@
 2. **三段式因果资产传导（3-Part Causal Transmission）**：严格保持 `🎯 核心进展` ➔ `🕰️ 前因溯源` ➔ `🌊 后果与资产传导` 格式，必须能够直接或间接映射到具体的经济变量（无风险利率 $r _ f$ 、汇率 USD/CNH、大宗商品油价/运价、算力 CapEx 节奏、合规成本、市场风险溢价 ERP）；
 3. **客观中立与“事实 vs 观点”切割（Epistemic Separation）**：保持严谨客观的学术中立立场，不带任何政治偏见；严格区分“已签署生效法律事实” vs “委员会草案审议” vs “华尔街情景测算推断”。
 
+## 🇨🇳 国内前沿 AI 模型厂商与开源生态跟踪规范 (Domestic Chinese AI Frontier Labs & Open-Source Ecosystem Standards)
+
+在 AI 科技与产业跟踪中，必须高度重视中国本土前沿大模型研发力量，严禁仅将目光局限于海外科技巨头（如 OpenAI、Google、Anthropic、Meta）。国内以 DeepSeek（深度求索）、Kimi / 月之暗面（Moonshot AI）、Qwen / 通义千问（阿里巴巴）、ByteDance Seed / 豆包（字节跳动）、智谱 AI（Zhipu GLM）、MiniMax（稀宇科技）、阶跃星辰（StepFun）等为代表的本土前沿团队，在模型架构创新（如 MLA 潜在注意力、深度稀疏 MoE）、长上下文检索、强化学习数学与代码推理、多模态端到端交互及极低推理成本方面展现了全球领先的技术穿透力与工程落地效率。
+
+### 1. 重点跟踪主体（Core Tracked Domestic AI Entities）
+1. **DeepSeek（深度求索 / 幻方量化）**：
+   * **核心技术看点**：深度稀疏 MoE 架构（DeepSeekMoE）、多头潜在注意力机制（Multi-Head Latent Attention, MLA，大幅压缩 KV Cache 显存占用并提升 Decoding 吞吐）、DualPipe 训练并行重叠流水线、FP8 混合精度低成本训练、大模型强化学习与思考链推理（DeepSeek-R1 / GRPO 对齐算法）、开源权重生态及极具杀伤力的 API 成本优势。
+2. **Kimi / 月之暗面（Moonshot AI）**：
+   * **核心技术看点**：超长无损上下文窗口（200 万字长文本 / 2M Context）、长程信息无损检索算法、Kimi k0-math 复杂数学与前沿逻辑推理模型、强化学习思维链探索、Kimi 浏览器与生产力智能体插件、Prompt Context Caching 上下文缓存计费。
+3. **Qwen / 通义千问（阿里巴巴 / Alibaba Cloud）**：
+   * **核心技术看点**：全模态与全尺寸开源权重矩阵（Qwen2.5 / Qwen2.5-Coder / Qwen2.5-Math / Qwen-VL 全开源生态）、HuggingFace 与 ModelScope 全球下载量生态、阿里云百炼企业级 API、端侧量化部署与多模态代理工具链。
+4. **ByteDance Seed / 豆包大模型（字节跳动 Seed 团队 / 火山引擎）**：
+   * **核心技术看点**：工业级极致并发推理（Doubao-pro / Doubao-lite）、Seed-TTS 高表现力语音大模型、Seed-Story / Seed-VLA 具身决策、扣子（Coze）一站式智能体生态、日均数万亿 Token 规模化调用下的极致定价策略。
+5. **智谱 AI、MiniMax 与阶跃星辰等创新阵营**：
+   * **智谱 AI（Zhipu GLM）**：GLM-4V 多模态、CogVideoX 开源视频生成、AutoGLM 端侧界面自动化智能体（Phone/PC Agent）与全尺寸 GLM 开源生态；
+   * **MiniMax（稀宇科技）**：abab 系列万亿 MoE、Hailuo AI（海螺 AI / Video-01）前沿视频生成算法与全球出海；
+   * **阶跃星辰（StepFun）**：Step 系列单步与多步万亿参数多模态理解与原生逻辑生成。
+
+### 2. 核心跟踪的 5 大维度（5 Core Tracking Dimensions）
+1. **基础算法与架构创新（Architectural & Algorithmic Innovation）**：
+   * 稀疏 MoE 专家路由效率（路由拓扑、细粒度专家划分、负载均衡辅助 Loss 设计）；
+   * KV Cache 极限压缩与注意力变体（MLA 潜在低秩投影、动态跨层维度剪枝、位置感知伪查询）；
+   * 强化学习推理与思考链演化（RLHF/DPO/GRPO、慢思考链、自博弈数学代码验证）。
+2. **开源权重与全球评测基准（Open Weights & Global Benchmarks）**：
+   * 权重开源协议、模型卡片（Model Card）完整度、开源社区复现代码库；
+   * 严格核验基准真实性（MATH-500、HumanEval、LiveCodeBench、Arena-Hard、LongBench 等），警惕训练集污染与刷榜偏误。
+3. **API 吞吐、定价机制与“Token 经济学”（API Economics & Inference Infrastructure）**：
+   * 百万 Token 输入/输出法定计费标准、上下文缓存（Prompt Cache）扣减比例；
+   * 首字延迟（TTFT）、每秒输出 Token 数（TPS）、并发吞吐及多机多卡异构部署效率。
+4. **智能体商业化与企业落地生态（Agent Platforms & Real-World Traffic）**：
+   * 智能体平台（扣子 Coze、阿里百炼、智谱智能体、Kimi 探索版）在企业办公、代码研发、金融量化及政企落地的实际渗透；
+   * B 端商业收入兑现（RPO / ARR / API 订阅）与 C 端月活（MAU）及用户留存深度。
+5. **算力基础设施与国产芯片适配（Domestic Hardware Adaptation & Infrastructure）**：
+   * 华为昇腾（Ascend）、海光（Hygon DCU）、天数智芯、摩尔线程等国产算力卡在国产大模型训练与全栈推理中的算子适配度、迁移开销与集群稳定性。
+
+### 3. 信源准则与防浮夸要求
+* 优先采信：官方技术白皮书/论文（arXiv）、官方 GitHub 开源仓库、厂商技术博客、开放平台官方 API 价格与服务公告、模型服务备案名单；
+* 严格剔除：非官方营销号公关软文、未经代码验证的吹捧与缺乏评测脚本的单向对比；
+* 区分：论文实测评测指标 vs 商业公关宣传口径。
+
 ## 后续日报模板
 
 1. 三地市场概览：各自交易日期、宽基表现、成交与市场广度。
 2. 行业轮动：科技与非科技行业并列，解释领先和落后行业。
-3. 政治经济与产业快讯：遵循三段式因果链，覆盖科技商业、宏观财政、地缘政策与监管审查。
-4. 国内公司：A 股与港股分别记录公司事件、行情及原始公告。
-5. 美股公司：保留 AI 专题，同时覆盖非科技行业。
+3. 政治经济、产业监管与国内/国际 AI 前沿快讯：遵循三段式因果链，兼顾全球科技、海外宏观财政监管与国内前沿 AI 厂商（DeepSeek、Kimi、Qwen、Seed 等）重大技术演进。
+4. 国内公司：A 股与港股分别记录公司事件、行情及原始公告（含本土科技与非科技龙头）。
+5. 美股公司：保留 AI 专题，同时覆盖非科技行业重大事件。
 6. 下一交易日观察：待发布财报、政策、宏观数据或法案窗口，列明时间与待验证指标。
 
 此规范需由日报生成任务读取才会持续生效；修改仓库文档不等于已修改外部定时任务。

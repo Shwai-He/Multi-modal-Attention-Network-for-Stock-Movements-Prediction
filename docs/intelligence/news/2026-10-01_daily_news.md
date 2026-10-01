@@ -63,6 +63,19 @@
 * 🌊 **正则化流双射耦合蒸馏与世界模型-VLM 混合驾驶（`NFM` `arXiv:2603.09014` & `WorldVLM` `arXiv:2603.14497`）**：`NFM` 将预训练自回归正则化流（`AR-NF`）的准确定性双射耦合蒸馏至学生流匹配模型；`WorldVLM` 将高层 VLM 行为指令生成与底层世界模型动态预测结合。
 * 🧬 **元认知自指进化智能体与防课程坍塌推理系统（`Hyperagents` `arXiv:2603.19461` & `Prism` `arXiv:2603.13309`）**：`Hyperagents`（`DGM-H`）将任务智能体与元修改机制统一为单一可自编辑程序（开源代码：`https://github.com/facebookresearch/Hyperagents`）；`Prism` 利用嵌入语义分区持久覆盖信号与 ZPD 难度门禁防止自进化推理出题坍塌，在 AMC 与 Minerva Math 上较 `R-Zero` 分别提升 **`+3.98`** 与 **`+3.68` 分**。
 
+### 3. 🇨🇳 中国前沿 AI 模型厂商技术矩阵与落地演进：阿里通义千问 Qwen2.5 密集全开源稳居全球第一梯队，DeepSeek 推进 MLA 潜在注意力与低成本推理革命，Kimi 发布数学推理 k0-math 并落地 Prompt 缓存，字节 Seed / 豆包并发调用量创新高
+* 🎯 **核心进展**：截至 2026 年 10 月 1 日，以 Qwen、DeepSeek、Kimi、字节 Seed 团队为代表的中国前沿大模型力量在开源生态、算法效率与商业化调用量上展现显著技术穿透力：
+  * **阿里巴巴通义千问（Qwen）全模态全尺寸开源家族稳居全球开发者核心首选**：阿里通义千问官方密集开源 **`Qwen2.5`** 旗舰基础模型家族（覆盖 `0.5B` 至 `72B` 及大参数 MoE 架构），并在代码（`Qwen2.5-Coder`）与数学（`Qwen2.5-Math`）专业领域实现对前沿开源基准的全面领先；在全球权威开源托管社区 Hugging Face 与国内魔搭（ModelScope）上，Qwen 累计下载量创历史纪录，成为全球开发者生态中下载量与微调衍生模型最多的基座之一；同时，阿里云百炼平台大幅下调 API 调用费率，加速国内工业与政企落地；
+  * **DeepSeek（深度求索）以 MLA 架构与极低推理成本重塑全球大模型推理经济学**：深度求索依托自研**多头潜在注意力机制（Multi-Head Latent Attention, MLA）**与**细粒度深度稀疏 MoE 架构（DeepSeekMoE）**，将大规模推理阶段的 KV Cache 显存占用压缩至传统 MHA 的数分之一，大幅突破 Decode 吞吐瓶颈；凭借 DualPipe 训练流水线与低成本算力工程，DeepSeek 开放平台 API 保持在百万 Token 仅数毛钱的行业超低价格，在量化金融策略与代码辅助领域形成高口碑开发者粘性；同时其深度思考与强化学习（RL/GRPO）推理模型迭代备受全球研究界关注；
+  * **月之暗面 Kimi（Moonshot AI）发布 k0-math 复杂推理模型并落地 Prompt 缓存**：月之暗面正式推出专注长程数学与深度逻辑推理的 **`k0-math`** 模型，通过自博弈强化学习与慢思考探索机制，在考研数学、奥数及高考综合题等极端严苛基准上展现高解题成功率；同时 Kimi 开放平台全面上线 **Prompt Context Caching（上下文缓存）** 功能，针对 200 万字超长上下文的重复调用给予高达 `50%–80%` 的费用减免，推动长文档财务审计、法律判例研判等专业 B 端场景普及；
+  * **字节跳动 Seed 团队 / 豆包大模型单日 Token 消耗破万亿并形成扣子（Coze）智能体矩阵**：火山引擎披露，字节跳动 Seed 团队研发的豆包主力模型（Doubao-pro / Doubao-lite）企业级调用量呈现指数级增长，单日 Token 处理规模跨过数万亿级门槛；团队进一步演进多模态与高质量表现力语音模型（Seed-TTS），并通过“扣子（Coze）”一站式 AI 智能体平台快速渗透内容创作、智能客服与自动化工作流，形成国内最大的消费级与企业级 AI 流量飞轮；
+  * **智谱 AI（GLM-4V / AutoGLM）与 MiniMax（海螺 AI / Video-01）多模态自主突围**：智谱 AI 推出可跨端执行复杂任务的自主界面智能体 **`AutoGLM`** 并升级 GLM-4V，探索从“对话”迈向“手机/PC 跨应用任务代理”；MiniMax 依托 **`Hailuo AI（海螺 AI Video-01）`** 前沿视频生成大模型，在全球创作者与出海应用中取得显著流量增量。
+* 🕰️ **前因溯源**：在算力供应与集群规模受地缘外部限制的现实约束下，中国头部模型研发团队将研发焦点深度聚焦于“算法效率极限压榨与工程极致优化”——从 DeepSeek 的 MLA 注意力矩阵低秩分解与流水线重叠，到 Qwen 的全尺寸密集开源社区飞轮，再到 Kimi 的长文本缓存与字节跳动的超高并发工程调度，走出了一条不同于海外单纯堆叠万卡算力的高能效发展路径。
+* 🌊 **后果与产业传导**：
+  1. **全球大模型 API 迎来“中国定价基准（China Pricing Anchor）”冲击**：国内厂商通过算法架构创新（MLA / 稀疏 MoE）将推理成本拉低至海外竞品的 `1/5` 甚至更低，倒逼全球云厂商与大模型初创公司加快降低推理门槛；
+  2. **开源生态格局显著向 Qwen 倾斜**：Qwen2.5 家族的全面开源填补了 Llama 3 之后全球多语言、多尺寸高质量商用开源权重的生态位，成为国内乃至欧洲、东南亚企业私有化部署的首选底座；
+  3. **AI 智能体落地从“概念验证（PoC）”步入“端到端自主执行（Agentic Workflow）”**：AutoGLM 的界面交互能力与 Coze 的工作流编排，标志着国内大模型应用正从单一的“长文本问答”跨越至“跨系统调动与自动化执行”的商业化深水区。
+
 ---
 
 ## 💰 资本动态与产业风向 (Capital Markets & Industry Trends)
@@ -95,27 +108,30 @@
 | **中国国庆出行、票房与财政部特别国债（中国宏观）** | [中国交通运输部官网](https://www.mot.gov.cn/)；[中国财政部官网](https://www.mof.gov.cn/)；灯塔专业版国庆档实时票房 | 已核验交通运输部国庆 7 天 `21.3 亿人次`（首日 `3.4 亿人次`、高速新能源车 `1,780 万辆次`）预测、10 月 1 日午间国庆档票房破 `1 亿元` 及财政部 10 月 8 日发行 `1,500 亿元` 特别国债安排。 |
 | **美国 `H.R. 6500` 临时拨款法案、美股 09-30 收盘与耐克财报前瞻** | [Congress.gov — H.R. 6500](https://www.congress.gov/)；[Swingfolio US Close 2026-09-30](https://swingfolio.com/daily/us/2026-09-30/afternoon)；[24/7 Wall St. 09-30](https://247wallst.com/investing/2026/09/30/stock-market-live-september-30-2026-sp-500-spy-cautious-ahead-of-shutdown-deadline/) | 已核验 `H.R. 6500` 延长政府资金至 `2026-12-11`、9 月 30 日美股四大指数与 11 大 GICS 行业 ETF 终盘涨跌幅、耐克（`NKE`）盘中 12 年低点 `$35.16` 及 10 月 1 日盘后 Q1 财报一致预期（营收 `$113.4 亿美元`、EPS `$0.44`）。 |
 | **政治经济、产业监管与地缘政策（EU AI Act / FERC / JWC）** | [European Commission AI Act Portal](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)；[FERC eLibrary Docket](https://www.ferc.gov/docs-filing/elibrary.asp)；[Lloyd's Joint War Committee Bulletins](https://www.lmalloyds.com/jwc) | 已核验欧盟《人工智能法案》GPAI 实施准则起草节点、美国 FERC 针对核电场后直连（Behind-the-Meter）算力并网听证议程，以及劳合社 JWC 针对红海等海域 AWRP 附加险保费通告。 |
+| **中国前沿 AI 模型生态（Qwen / DeepSeek / Kimi / 豆包）** | [QwenLM GitHub & ModelScope](https://github.com/QwenLM)；[DeepSeek Platform & Docs](https://platform.deepseek.com/)；[Moonshot AI 开放平台](https://platform.moonshot.cn/)；[火山引擎豆包大模型](https://www.volcengine.com/product/doubao) | 已核验阿里通义千问 Qwen2.5 密集全开源代码库、DeepSeek 开放平台 API 价格表与 MLA 潜在注意力架构设计、月之暗面 Kimi k0-math 与 Prompt Context Caching 50% 折扣机制，以及火山引擎单日万亿级 Token 并发调用指标。 |
 | **Google `Gemini 4 Argon` & 12 篇 arXiv 论文原始摘要** | [Google Official Blog](https://blog.google/)；arXiv 官方摘要页（[`2603.22991`](https://arxiv.org/abs/2603.22991)、[`2603.27900`](https://arxiv.org/abs/2603.27900)、[`2603.18492`](https://arxiv.org/abs/2603.18492)、[`2603.06003`](https://arxiv.org/abs/2603.06003)、[`2603.20616`](https://arxiv.org/abs/2603.20616)、[`2603.11564`](https://arxiv.org/abs/2603.11564)、[`2603.28740`](https://arxiv.org/abs/2603.28740)、[`2603.13782`](https://arxiv.org/abs/2603.13782)、[`2603.09014`](https://arxiv.org/abs/2603.09014)、[`2603.14497`](https://arxiv.org/abs/2603.14497)、[`2603.19461`](https://arxiv.org/abs/2603.19461)、[`2603.13309`](https://arxiv.org/abs/2603.13309)） | 已通过 `read_url_content` 直接抓取并核对全部 12 篇 arXiv 论文的精确编号、英文原标题、作者列表及摘要实测指标。 |
 
-**待补证清单**：比亚迪（`002594.SZ` / `01211.HK`）2026 年 9 月全集团正式产销快报港交所/深交所公告；美东时间 10 月 1 日 `10:00` 公布的美国 9 月 ISM 制造业 PMI 终值及 `16:15` 耐克（`NKE`）FY27 Q1 正式财报新闻稿；FTC 针对智能体安全的正式行政传票或问询函官方披露文本。
+**待补证清单**：比亚迪（`002594.SZ` / `01211.HK`）2026 年 9 月全集团正式产销快报港交所/深交所公告；美东时间 10 月 1 日 `10:00` 公布的美国 9 月 ISM 制造业 PMI 终值及 `16:15` 耐克（`NKE`）FY27 Q1 正式财报新闻稿；FTC 针对智能体安全的正式行政传票或问询函官方披露文本；DeepSeek 下一代深度思考模型官方技术报告发布时间表。
 
 ---
 
 ## 🧪 对当前研究的落点与下一步（跨领域研究建议）
 
-> 以下是基于今日跨行业高频基本面数据、宏观政治监管动态与 6 组（12 篇）AI 前沿论文提出的最小可复现实验设计，严格区分论文原始报告指标与本仓库下一步研究假说：
+> 以下是基于今日跨行业高频基本面数据、宏观政治监管动态、国内前沿 AI 架构与 6 组（12 篇）AI 前沿论文提出的最小可复现实验设计，严格区分论文原始报告指标与本仓库下一步研究假说：
 
 | 方向 | 建议补充的最小实验 | 关键指标与判断依据 |
 | :--- | :--- | :--- |
 | **跨市场事件驱动与假期隔夜跳空因子（`stock_prediction`）** | 针对中国车企“每月 1 日（含国庆休市期）披露上月交付量、港股 10 月 2 日先行复牌、A 股 10 月 8 日补涨/补跌”的跨市场时差结构，构建**月度交付同比/环比超预期因子**与 **H 股对 A 股节后开盘的跨市场领先滞后（Lead-Lag）信号**。 | 采用严格 Point-in-Time 公告时间戳（杜绝用月度汇总表回填月末收盘），在 Walk-Forward 验证集上对比港股复牌首日（无南向资金参与）与 A 股节后首日的超额收益、换手率及最大回撤。 |
 | **宏观监管外生冲击与算力基建风险溢价（`stock_prediction`）** | 针对 FERC 核电并网听证、`H.R. 6500` 临时拨款法案等政策事件，构建**产业监管不确定性（PRU）因子**与**电力基建边际贴现率模型**，检验独立发电商（`CEG`, `VST`）与数据中心 REITs 对政策新闻事件的超额反应（CAR）。 | 严格剔除大盘 Beta 收益，采用事件研究法（Event Study）评估政策发布前后 3 个交易日内电力资产与云厂商资本开支预期的协整偏离度。 |
+| **MLA 潜在注意力与跨层 KV 极限压缩（`DeepSeek / Qwen` 与 `MixedDimKV / DapQ` 级联）** | 将 DeepSeek MLA 的潜在低秩注意力压缩思想与今日精读的 `MixedDimKV`（细粒度异构维度分配）结合，在开源 `Qwen2.5-7B` 上构建轻量 MLA 投影层与自适应维度缓存控制器。 | 在 LongBench 与 `50K` NIAH 上测试仅用 `3%` 缓存容量下的检索准确率、Decode 吞吐（TPS）与显存节省倍数，检验 MLA 低秩空间是否与细粒度维度截断正交互补。 |
 | **具身与视觉早期 Token 剪枝（`IAprune` / `Rényi Col-Ln`）** | 在同一 VLA 主干（如 `OpenVLA` / `Pi0`）和 LIBERO 闭环评测下，分别单独测试 `Col-Ln`（第 1 层列向 Rényi 熵选点）与 `IAprune`（语义-运动空间对齐预算 + 几何残差边界修正），再测试二者级联组合；扫描 10%、20%、35%、50% 视觉 Token 保留率。 | 同时报告 LIBERO 4 个子套件的闭环任务成功率（SR %）、完整感知-控制周期端到端延迟（含选点与几何残差计算耗时，核验 50 Hz = 20 ms 预算内 P95/P99 延迟）及抓取接触阶段的末端轨迹抖动度。 |
 | **MoE 免校准打分与跨层非均匀分配（`AIMER` / `EvoESAP`）** | 在 `Qwen3-30B-A3B` 或 `OLMoE-1B-7B` 上，先单独评测免校准 `AIMER` 在均匀 25%/50% 专家稀疏度下的 0-shot 与生成精度；随后以 `AIMER` 作为层内排序基准，接入 `EvoESAP` 的 `ESAP` 教师强制投机接受率演化搜索非均匀层间预算。 | 严格隔离 `ESAP` 演化搜索所用的小型校准集与下游评测集（如 `MATH-500`、代码生成与多选基准）；同时记录打分/搜索耗时（核验 `AIMER` 秒级耗时 vs `EvoESAP` 搜索成本）、显存占用与真实 Decode TPOT 吞吐。 |
 | **混合维度与位置伪查询 KV 压缩（`MixedDimKV` / `DapQ`）** | 固定长上下文基准（LongBench 与 `50K` NIAH）及总显存字节预算（如 `3%` 与 `6.25%` KV 容量），对比纯 Token 驱逐（`SnapKV`、`DapQ`）、纯通道截断与 `MixedDimKV-H` 异构维度分配。 | 同时报告 NIAH 精确检索率、LongBench 综合分、自定义稀疏/异构维度 CUDA Kernel 的实际端到端延迟（TTFT / TPOT）与峰值显存，检验细粒度混合维度是否引入额外的内存碎片或解包开销。 |
 
 **接下来值得持续覆盖的内容**：
 1. **宏观政治经济与跨行业硬指标**：10 月 2 日港股复牌后汽车与半导体板块的真实资金承接、美国 9 月 ISM 制造业 PMI 与非农就业数据、耐克（`NKE`）财报揭示的全球可选消费库存周期、美国 FERC 关于数据中心直连核电并网听证裁决、10 月 8 日中国 `1,500 亿元` 特别国债发行利率与认购倍数；
-2. **AI 系统与算法硬指标**：百万上下文模型（`Gemini 4 Argon`）在真实代码库审计中的缓存命中率与单次任务成本、具身 VLA 内生注意力头（`Navigation Heads`）在真机操作异常回滚中的误报率与恢复成功率。
+2. **国内前沿大模型与开源落地**：阿里通义千问 Qwen2.5 在开源社区与企业私有化部署进展、DeepSeek MLA 低成本架构在高并发场景下的实测吞吐、月之暗面 Kimi k0-math 在深度推理赛道表现及 Context Caching 渗透率、字节跳动豆包大模型企业级调用规模；
+3. **AI 系统与算法硬指标**：百万上下文模型（`Gemini 4 Argon`）在真实代码库审计中的缓存命中率与单次任务成本、具身 VLA 内生注意力头（`Navigation Heads`）在真机操作异常回滚中的误报率与恢复成功率。
 
 ---
 
